@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Enroll</title></head>
+<body>
+  <h2>Enroll in a Course</h2>
+  <form id="enrollForm">
+    Student ID: <input type="number" id="studentId" required><br>
+    Course ID: <input type="number" id="courseId" required><br>
+    <button type="submit">Enroll</button>
+  </form>
+  <script>
+    document.getElementById("enrollForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const studentId = document.getElementById("studentId").value;
+      const courseId = document.getElementById("courseId").value;
+
+      fetch(`/api/enrollments?studentId=${studentId}&courseId=${courseId}`, {
+        method: 'POST'
+      }).then(res => res.json())
+        .then(data => alert("Enrolled Successfully"))
+        .catch(err => alert("Enrollment Failed"));
+    });
+  </script>
+</body>
+</html>
